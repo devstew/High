@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, IndexRoute } from "react-router";
-import { template } from "handlebars";
+//import { template } from "handlebars";
 import Template from "../containers/Template";
-import Home from "../containers/Home";
+import HighApp from "../containers/HighApp";
 import Profile from "../containers/Profile";
 
 const createRoutes = () => {
   return (
     <Route>
       path='\' component={Template}
-      <IndexRoute component={Home} />
+      <IndexRoute component={HighApp} />
       <Route path={"/profile"} component={Profile} />
     </Route>
   );
