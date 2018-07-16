@@ -8,6 +8,7 @@ import {
   Column,
   ColumnLabels
 } from "../styled/Profile";
+import Relay from 'react-relay'
 
 class Profile extends Component {
   static defaulProps = {
@@ -80,4 +81,16 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default Relay.createRefetchContainer(
+  Profile, {
+    fragments: {
+      viewer: () => Relay.QL`
+        fragment on Viewer {
+          user{
+            id
+          }
+        }
+      `,
+    }
+  }
+)

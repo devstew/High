@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Stage } from "react-konva";
 import  Board from "../styled/HighApp";
 import  Squares  from "../styled/HighApp";
+import Relay from 'react-relay'
 
 class HighApp extends Component {
   constructor(props) {
@@ -143,4 +144,16 @@ class HighApp extends Component {
   }
 }
 
-export default HighApp;
+export default Relay.createRefetchContainer(
+  HighApp, {
+    fragments: {
+      viewer: () => Relay.QL`
+        fragment on Viewer {
+          user{
+            id:
+          }
+        }
+      `,
+    }
+  }
+)

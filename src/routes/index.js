@@ -4,13 +4,28 @@ import { Route, IndexRoute } from "react-router";
 import Template from "../containers/Template";
 import HighApp from "../containers/HighApp";
 import Profile from "../containers/Profile";
+import Relay from 'react-relay'
+import auth from '../utils/auth'
+const ViewerQueries = {
+  viewer: () => Relay.QL`query {viewer}`
+}
 
 const createRoutes = () => {
   return (
-    <Route>
-      path='\' component={Template}
-      <IndexRoute component={HighApp} />
-      <Route path={"/profile"} component={Profile} />
+    <Route
+      path='/' 
+      component={Template}
+      queries={ViewerQueries}
+      auth={auth}
+      >
+      <IndexRoute 
+      component={HighApp}
+      queries={ViewerQueries}
+      />
+      <Route 
+      path={"/profile"} 
+      queries={ViewerQueries}
+      component={Profile} />
     </Route>
   );
 };
